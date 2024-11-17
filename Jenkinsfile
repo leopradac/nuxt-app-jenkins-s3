@@ -59,6 +59,13 @@ pipeline {
                 // }
 
                 sh 'aws s3 ls' // Example: List S3 buckets
+                echo "Retrieving secrets from AWS Secrets Manager..."
+                NR_KEY=$(aws secretsmanager get-secret-value --secret-id "admin/app/dev/NR_KEY" --query SecretString --output text)
+
+                # Append secrets to .env file
+                echo "Adding secrets to .env file..."
+                echo "NR_KEY=${NR_KEY}"
+                echo "NR_KEY=${NR_KEY}" >> .env
             }
         }
     }
