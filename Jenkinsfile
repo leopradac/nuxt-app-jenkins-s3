@@ -16,13 +16,9 @@ pipeline {
 
         stage('Setup') {
             steps {
-                // TODO: check how to use nvm as plugin at reg-ui
-                // Setup Node.js
-                sh "nvm install ${NODE_VERSION}"
-                sh "nvm use ${NODE_VERSION}"
-                
-                // Install dependencies
-                sh 'npm ci'
+                nvm(version: "${NODE_VERSION}") {
+                    // Install dependencies
+                    sh 'npm ci'
 
                 // config aws credentials
                 withCredentials([[
@@ -34,7 +30,9 @@ pipeline {
                     aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
                     aws configure set region $AWS_REGION
                     """
+                    }
                 }
+                
             }
         }
 
