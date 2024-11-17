@@ -1,6 +1,6 @@
 services:
   jenkins:
-    image: custom-jenkins
+    build: .
     container_name: jenkins
     restart: unless-stopped
     privileged: true
@@ -15,8 +15,11 @@ services:
     volumes:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
+      - jenkins-docker-certs:/certs/client
     networks:
       - jenkins-network
+    depends_on:
+      - docker
 
   docker:
     image: docker:dind

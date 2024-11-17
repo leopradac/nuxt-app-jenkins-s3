@@ -10,19 +10,28 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     lsb-release \
     python3 \
-    python3-pip
+    python3-pip \
+    # Add cleanup to reduce image size
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs
+    && apt-get update \
+    && apt-get install -y nodejs \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install AWS CLI
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && ./aws/install \
     && rm -rf aws awscliv2.zip
+
 # Install Docker CLI
-RUN curl -fsSL https://get.docker.com | sh
+RUN curl -fsSL https://get.docker.com | sh \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 USER jenkins
 
