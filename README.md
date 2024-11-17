@@ -1,8 +1,27 @@
+# Setup Jenkins (docker)
+
+> cd jenkins-docker
+> docker compose up -d
+
+define github-credentials (check if required)
+define aws-credentials
+create pipeline
+
+```
+Definition: Pipeline script from SCM
+SCM: Git
+Repositories: https://github.com/repo
+Branch Specifier: \*/main
+Script Path: Jenkinsfile
+```
+
+Jenkins at: http://localhost:8080
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
-## Setup
+## Setup (APP)
 
 Make sure to install dependencies:
 
