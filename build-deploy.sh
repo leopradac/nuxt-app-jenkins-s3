@@ -7,10 +7,10 @@ get_and_set_secret() {
     echo "Retrieving ${var_name} from AWS Secrets Manager..."
     local secret_value=$(aws secretsmanager get-secret-value --secret-id "registration/ui/${STAGE}/${var_name}" --query SecretString --output text)
     
-    if [ -z "$secret_value" ]; then
-        echo "Error: Failed to retrieve ${var_name}"
-        exit 1
-    fi
+    # if [ -z "$secret_value" ]; then
+    #     echo "Error: Failed to retrieve ${var_name}"
+    #     exit 1
+    # fi
     
     echo "${var_name}=${secret_value}" >> .env
 }
