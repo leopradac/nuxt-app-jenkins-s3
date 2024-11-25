@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     public: {
       TEST_PUBLIC: "safe value",
     },
-    private: {
+    app: {
       NR_KEY: process.env.NR_KEY,
       NR_APP_ID: process.env.NR_APP_ID,
     },
