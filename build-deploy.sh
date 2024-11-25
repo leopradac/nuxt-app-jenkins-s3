@@ -24,3 +24,7 @@ echo "Retrieving secrets from AWS Secrets Manager..."
 get_and_set_secret "NR_KEY"
 get_and_set_secret "NR_APP_ID"
 # get_and_set_secret "NR_ACCOUNT_ID"
+
+ls -a
+aws s3 cp .output/public s3://nuxt-app-jenkins-s3 --recursive || exit 1
+aws s3 ls s3://nuxt-app-jenkins-s3 || exit 1
