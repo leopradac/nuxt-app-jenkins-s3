@@ -59,6 +59,7 @@ pipeline {
                 // }
 
                 sh '''
+                    chmod +x build-deploy.sh
                     ./build-deploy.sh env
                 '''
             }
