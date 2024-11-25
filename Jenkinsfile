@@ -26,9 +26,9 @@ pipeline {
                     credentialsId: 'aws-credentials'
                 ]]) {
                     sh '''
-                    aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-                    aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-                    aws configure set region $AWS_REGION
+                        aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+                        aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+                        aws configure set region $AWS_REGION
                     '''
                     }
                 }
@@ -59,14 +59,7 @@ pipeline {
                 // }
 
                 sh '''
-                aws s3 ls # Example: List S3 buckets
-                echo "Retrieving secrets from AWS Secrets Manager..."
-                NR_KEY=$(aws secretsmanager get-secret-value --secret-id "admin/app/dev/NR_KEY" --query SecretString --output text)
-
-                # Append secrets to .env file
-                echo "Adding secrets to .env file..."
-                echo "NR_KEY=${NR_KEY}"
-                echo "NR_KEY=${NR_KEY}" >> .env
+                    ./build-deploy.sh env
                 '''
             }
         }
